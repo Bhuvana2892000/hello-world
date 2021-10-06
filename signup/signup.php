@@ -16,7 +16,7 @@ $email = $_POST['email'];
 $stmt = $conn->prepare("INSERT INTO user ($usename,md5($password),$email) VALUES (?, ?, ?)");
 
 if($conn) {
-        echo "successfull signup"; 
+        echo "successfully signup"; 
     } 
     else {
         die("Error". mysqli_connect_error()); 
