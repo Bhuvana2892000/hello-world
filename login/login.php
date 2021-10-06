@@ -23,6 +23,5 @@ if($conn) {
         die("Error". mysqli_connect_error()); 
     } 
 
-$stmt->close();
-$conn->close();
+
 ?>
