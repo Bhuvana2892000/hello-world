@@ -1,8 +1,8 @@
-Login and Signup page
+# Login and Signup page
 
-# Tool used
-wampserver
+## Installation
+used the wampserver to connect php and mysql
 
-# Connection using mysqli_connect
- database name="Login" for login page "Signup" for signup page
+## Database name in mysql
+ database name="Login" for login page and "Signup" for signup page
 
