@@ -1,12 +1,16 @@
-<<<<<<< HEAD
+
 # Login and Signup page
+
+Built with PHP and MYSQL
+
+Tasks
+Require the username,password and email
 
 ## Installation
 used the wampserver to connect php and mysql
 
 ## Database name in mysql
- database name="Login" for login page and "Signup" for signup page
+ Database name="php" 
+ Table Name="user"
+ 
 
-=======
-# LoginPage
->>>>>>> 87bc83589d103b88afd6ce54dd25c028cd0c8915
