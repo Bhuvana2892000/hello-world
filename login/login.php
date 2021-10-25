@@ -1,46 +1,55 @@
 <?php
-class DB {
-    protected $servername = "localhost";
-    protected $username = "root";
-    protected $password = "";
-    protected $dbname = "php";
-	
-	public function connect() {
-	
-		$connect_db = new mysqli( $this->servername, $this->username, $this->password, $this->dbname );
-		
-		if($connect_db) {
-            error_log("Failed to connect to database!", 0);
-        } 
+
+include('logincon.php');
+
+
+$db = new Database();
+
+$data = $_POST;
+
+if (empty($data['username']) || empty($data['email'])) {
+    
+    die('Please fill all required fields!');
+}
+
+if (isset($_POST['submit'])){
+
+        $username = $_POST['username'];
+
+        $email = $_POST['email'];
+
+        $stmt = $db->getConnection() ->prepare("Select username,email from user where username = ? OR email = ?");
+        $stmt->bind_param('ss',$username,$email);
+        $stmt->execute();
+        $stmt->bind_result($username, $password);
+        $result = $stmt->store_result();
+        if($stmt->num_rows == 1) 
+        {
+            while($stmt->fetch()) 
+
+              {
+               $_SESSION['Logged'] = 1;
+               $_SESSION['username'] = $username;
+               $_SESSION['email'] = $email;
+               echo "Hi " .$username. "! You have logged in successfully!!";
+               exit();
+               }
+        }
         else {
-            error_log("Successfully connected", 1);
-        } 
-		
-	}
-}
+            echo "INVALID USERNAME/E-MAIL Combination!";
+        }
+        $stmt->close();
+    }
+    else 
+    {   
 
-
-$username = $_POST['username'];
-
-$password = $_POST['password'];
-
-$password = md5($password); 
-
-$email = $_POST['email'];
-
-if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
-	
-	echo '<script>alert("Please complete the registration form")</script>';
-}
-
-$stmt = $conn->prepare("SELECT * FROM user WHERE username ='$username' && email='$email'");
-if($stmt->execute()){
-    $result = $stmt->get_result();
-    $num_rows = $result->num_rows;
-}
-if($num_rows > 0){
-    echo "Successfully Login";
-}else{
-    echo "Invalid username or email" ;
-}
+    }
+   
 ?>
+
+
+
+
+
+
+   
